@@ -161,6 +161,7 @@ public class Signup extends AppCompatActivity {
                         "Registration Successful",
                         Toast.LENGTH_LONG)
                         .show();
+                startActivity(new Intent(getApplicationContext(),Login.class));
                 //if sucessful login then go to main activity
                 /*Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
                 intent.putExtra("JSONStr", jsonStr);
