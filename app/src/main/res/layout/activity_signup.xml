@@ -57,7 +57,7 @@
         app:layout_constraintVertical_bias="0.19" />
 
     <EditText
-        android:id="@+id/id_email"
+        android:id="@+id/idEmail"
         android:layout_width="325dp"
         android:layout_height="44dp"
         android:background="@color/colorAccent"
@@ -87,7 +87,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_email"
+        app:layout_constraintTop_toBottomOf="@+id/idEmail"
         app:layout_constraintVertical_bias="0.060000002" />
 
     <Button

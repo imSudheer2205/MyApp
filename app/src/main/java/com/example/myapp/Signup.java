@@ -2,10 +2,10 @@ package com.example.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,10 +17,6 @@ import com.example.myapp.data.HttpHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +28,10 @@ public class Signup extends AppCompatActivity {
     Button btn_sign;
     UserLoginTask mAuthTask;
 
-    private static final String REGISTER_URL = "http://atharvaayurdhama.in/UserRegistration/signup.php";
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    //String MobilePattern = "[0-9]{10}";
+
+    private static final String REGISTER_URL = "https://atharvaayurdhama.in/UserRegistration/signup.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         edit_username = (EditText)findViewById(R.id.id_username);
-        edit_email = (EditText)findViewById(R.id.id_email);
+        edit_email = (EditText)findViewById(R.id.idEmail);
         edit_pass = (EditText)findViewById(R.id.id_pass);
         btn_sign = (Button) findViewById(R.id.btn_signup);
 
@@ -55,7 +54,50 @@ public class Signup extends AppCompatActivity {
     private void registerUser() {
         String username=edit_username.getText().toString().trim().toLowerCase();
         String email=edit_email.getText().toString().trim().toLowerCase();
-        String password=edit_pass.getText().toString().trim().toLowerCase();
+        String password=edit_pass.getText().toString().trim();
+
+        if(TextUtils.isEmpty(username)){
+            edit_username.setError("Name Required.");
+            return;
+        }
+
+        if(TextUtils.isEmpty(email)){
+            edit_email.setError("Email is Required.");
+            return;
+        }
+
+        if(!email.matches(emailPattern) && email.length() > 0)
+        {
+            edit_email.setError("Email Format Should be <abc@gmail.com>.");
+            return;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            edit_pass.setError("Password is requied.");
+            return;
+        }
+
+        if(password.length() < 8){
+            edit_pass.setError("Password Must be >= 8 Characters.");
+            return;
+        }
+
+        if(!password.matches("^(?=.*[_.()$&@]).*$")){
+            edit_pass.setError("Password Must contain atleast 1 Number, 1 Special Character and 1 Uppercase Letter.");
+            return;
+        }
+
+        if(!password.matches("(.*[0-9].*)")){
+            edit_pass.setError("Password Must contain atleast 1 Number, 1 Special Character and 1 Uppercase Letter.");
+            return;
+        }
+
+        if(!password.matches("(.*[A-Z].*)")){
+            //hasUpper=true;
+            edit_pass.setError("Password Must contain atleast 1 Number, 1 Special Character and 1 Uppercase Letter.");
+            return;
+        }
+
 
        // register(username,email,password);
         mAuthTask = new UserLoginTask(username,email,password);
@@ -95,6 +137,11 @@ public class Signup extends AppCompatActivity {
             postparam.put("username", mName);
             postparam.put("email", mEmail);
             postparam.put("password", mPwd);
+
+            /*if(TextUtils.isEmpty(edit_email)){
+                mEmail.setError("Email is Required.");
+                return;
+            }*/
 
 
             for (Map.Entry<String,String> entry : postparam.entrySet()) {
@@ -157,6 +204,11 @@ public class Signup extends AppCompatActivity {
             mAuthTask = null;
 
             if (success) {
+                Toast.makeText(getApplicationContext(),
+                        "Registration Successful",
+                        Toast.LENGTH_LONG)
+                        .show();
+                startActivity(new Intent(getApplicationContext(),Login.class));
                 //if sucessful login then go to main activity
                 /*Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
                 intent.putExtra("JSONStr", jsonStr);
