@@ -90,8 +90,8 @@ public class Signup extends AppCompatActivity {
             return;
         }
 
-        if(phone_number.length() < 10){
-            edit_phone.setError("Please enter a valid phone number");
+        if(phone_number.length() < 10 && phone_number.length() > 10) {
+            edit_phone.setError("Please enter valid 10 digit phone number.");
             return;
         }
 
