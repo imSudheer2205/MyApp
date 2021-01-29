@@ -24,6 +24,7 @@ public class Signup extends AppCompatActivity {
 
     EditText edit_username;
     EditText edit_email;
+    EditText edit_phone;
     EditText edit_pass;
     Button btn_sign;
     UserLoginTask mAuthTask;
@@ -38,9 +39,10 @@ public class Signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        edit_username = (EditText)findViewById(R.id.id_username);
-        edit_email = (EditText)findViewById(R.id.idEmail);
-        edit_pass = (EditText)findViewById(R.id.id_pass);
+        edit_username = (EditText)findViewById(R.id.fullname_reg);
+        edit_email = (EditText)findViewById(R.id.email_reg);
+        edit_phone = (EditText)findViewById(R.id.phone_reg);
+        edit_pass = (EditText)findViewById(R.id.password_reg);
         btn_sign = (Button) findViewById(R.id.btn_signup);
 
         btn_sign.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +56,7 @@ public class Signup extends AppCompatActivity {
     private void registerUser() {
         String username=edit_username.getText().toString().trim().toLowerCase();
         String email=edit_email.getText().toString().trim().toLowerCase();
+        String phone_number = edit_phone.getText().toString().trim().toLowerCase();
         String password=edit_pass.getText().toString().trim();
 
         if(TextUtils.isEmpty(username)){
@@ -66,6 +69,16 @@ public class Signup extends AppCompatActivity {
             return;
         }
 
+        if(TextUtils.isEmpty(phone_number)) {
+            edit_phone.setError("Phone Required");
+            return;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            edit_pass.setError("Password Required");
+            return;
+        }
+
         if(!email.matches(emailPattern) && email.length() > 0)
         {
             edit_email.setError("Email Format Should be <abc@gmail.com>.");
@@ -73,7 +86,12 @@ public class Signup extends AppCompatActivity {
         }
 
         if(TextUtils.isEmpty(password)){
-            edit_pass.setError("Password is requied.");
+            edit_pass.setError("Password is required.");
+            return;
+        }
+
+        if(phone_number.length() < 10){
+            edit_phone.setError("Please enter a valid phone number");
             return;
         }
 

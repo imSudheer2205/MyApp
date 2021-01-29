@@ -7,6 +7,23 @@
     android:background="@drawable/bg1"
     tools:context=".Signup">
 
+    <EditText
+        android:id="@+id/phone_reg"
+        android:layout_width="325dp"
+        android:layout_height="44dp"
+        android:background="@color/colorAccent"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="textPhonetic"
+        android:padding="10dp"
+        android:textColorHint="@android:color/background_light"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_reg"
+        app:layout_constraintVertical_bias="0.037" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="160dp"
@@ -40,7 +57,7 @@
         app:layout_constraintVertical_bias="0.098" />
 
     <EditText
-        android:id="@+id/id_username"
+        android:id="@+id/fullname_reg"
         android:layout_width="325dp"
         android:layout_height="44dp"
         android:background="@color/colorAccent"
@@ -57,7 +74,7 @@
         app:layout_constraintVertical_bias="0.19" />
 
     <EditText
-        android:id="@+id/idEmail"
+        android:id="@+id/email_reg"
         android:layout_width="325dp"
         android:layout_height="44dp"
         android:background="@color/colorAccent"
@@ -70,11 +87,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_username"
+        app:layout_constraintTop_toBottomOf="@+id/fullname_reg"
         app:layout_constraintVertical_bias="0.060000002" />
 
     <EditText
-        android:id="@+id/id_pass"
+        android:id="@+id/password_reg"
         android:layout_width="325dp"
         android:layout_height="44dp"
         android:background="@color/colorAccent"
@@ -87,8 +104,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idEmail"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintTop_toBottomOf="@+id/email_reg"
+        app:layout_constraintVertical_bias="0.245" />
 
     <Button
         android:id="@+id/btn_signup"
@@ -96,6 +113,7 @@
         android:layout_height="44dp"
         android:background="@color/colorPrimary"
 
+        android:onClick="mainActivity"
         android:padding="10dp"
         android:text="Register"
         android:textColor="@android:color/background_dark"
@@ -104,9 +122,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_pass"
-        android:onClick="mainActivity"
-        app:layout_constraintVertical_bias="0.07999998"
+        app:layout_constraintTop_toBottomOf="@+id/password_reg"
+        app:layout_constraintVertical_bias="0.147"
         tools:ignore="OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
